@@ -1,8 +1,13 @@
 # <p align="center">NFL Management System</p>
+
 ## Introduction
-### Project Objective:
+
+### Project Objective
+
 The goal of this database project is to create a relational database that models a football league management system by implementing data engineering concepts. Our group expects to manage teams, players, offense and defense, statistics, divisions, and conferences of the football league. The management system will be organized in an efficient and clear manner allowing for querying the data smoothly and updating it when needed. It is implemented using tools like postgreSQL, Jupyter Notebook, and Python (For scraping NFL data online).
-### Project Scope:
+
+### Project Scope
+
 The football league will be restricted only to one league, the National Football League (NFL). We will not include any college football leagues or minor professional leagues like the United States Football League (USFL) or Xtreme Football League (XFL). The NFL management system will be confined to the following:
 - 32 NFL teams, each with offense, defense, and special teams
 - The 2023 NFL season (the regular season which spans from September 2023 to January 2024)
@@ -15,7 +20,8 @@ We will not include any support staff (referees, medical, athletic training) for
 
 Furthermore, we decided to include postseason game statistics from the 1966 postseason to the 2023 postseason to link NFL teams to their championships. For the previous post seasons leading up to the 2023 season, we want data that only includes the postseason games in order to answer questions regarding playoffs, championships, and superbowls (It is important to note that no player data was considered from those previous seasons)
 
-## Entity-Relationship Diagram:
+## Entity-Relationship Diagram
+
 <p align="center"><img src="/readme/images/E-R Diagram.png"/></p>
 
 ## Relational Model: 
@@ -47,10 +53,11 @@ Thus, we derived the following schemas after applying normalization techniques:
 - Defense_game_stats(player_id, game_id, tackles, sacks, fumbles_recovered, interceptions, passes_defended)
 - Special_game_stats(player_id, game_id, field_goals, fg_attempts, extra_points, ep_attempts, punts, punt_yards) 
 
-## Schema Diagram:
+## Schema Diagram
+
 <p align="center"><img src="/readme/images/Schema Diagram.png"/></p>
 
-## Dataset Description :
+## Dataset Description
 
 The dataset includes a handful of related tables that highlights the key components of data every football league should include: 
 - Team: Each team is identified by its mascot and is associated with details such as location, coach, home city and state, division, wins, losses, and standing, and relationships between the team and its home stadium.
@@ -65,7 +72,103 @@ The dataset includes a handful of related tables that highlights the key compone
 
 The dataset will be designed to support queries to view the league’s history, such as team statistics, individual player statistics, or statistics by game, as well as organize for the future such as finding information for upcoming matches. 
 
-# Tools used
+## Table Creation
+
+Included is the SQL file for creating tables for the NFL Management System database project (Team-3-DDL.sql). The tables our group decided to implement are: stadium, team, player, season, game, offense_game_stats, defense_game_stats, and special_game_stats. More detail about each table’s primary key and foreign key (if used) is explained below. 
+
+The primary key for the stadium table is its city and state. For the team table, the primary key is the mascot and home is a foreign key to the home_city and home_state. For the player table, the primary key is the id and has a foreign key for the team which references the team’s table mascot. For the season, its primary key is the year. For the game table, the primary key is the game_id, the game’s season_year and season_type is a foreign key to season’s year and type, home_team is a foreign key that references the team's mascot, and away_team is a foreign key that references the team’s mascot. For the offense_game_stats table, the primary key is the player_id and game_id, the player_id is a foreign key that references the player’s id, and the game_id is a foreign key that references the game’s game_id. The same primary keys and foreign keys are applied to the defense_game_stats and special_game_stats table just like the offense_game_stats table.  
+
+More detail regarding the attributes of each table is provided below: 
+
+| Relation | Attribute | Domain |
+| -------- | --------- | ------ |
+| stadium | name | varchar(50) |
+| stadium | city | varchar(50) |
+| stadium | state | char(2) |
+| stadium | address | varchar(50) |
+| stadium | capacity | int |
+| stadium | turf_type | varchar(50) |
+
+
+| Relation | Attribute | Domain |
+| -------- | --------- | ------ |
+|  team  | mascot | varchar(50) |
+|  team  | location | varchar(50) |
+|  team  | coach | varchar(50) |
+|  team  | home_city | varchar(50) |
+|  team  | home_state | varchar(50) |
+|  team  | division | varchar(50) |
+|  team  | wins | int |
+|  team  | losses | int |
+|  team  | standing | int |
+
+| Relation | Attribute | Domain |
+| -------- | --------- | ------ |
+| player | id | varchar(8) |
+| player | name | varchar(50) |
+| player | team | varchar(50) |
+| player | height | varchar(4) |
+| player | weight | numeric(3,0) |
+| player | age | numeric(2,0) |
+| player | position | varchar(3) |
+| player | jersey | numeric(2,0) |
+| player | birth_date | varchar(10) |
+| player | years_played | smallint |
+| player | college | varchar(50) |
+
+| Relation | Attribute | Domain |
+| -------- | --------- | ------ |
+| season | year | numeric(4,0) |
+| season | start_date | numeric(4,0) |
+| season | end_date | numeric(4,0) |
+
+| Relation | Attribute | Domain |
+| -------- | --------- | ------ |
+|  game  | game_id | varchar(12) |
+|  game  | season_year | numeric(4,0) |
+|  game  | week | varchar(9) |
+|  game  | game_date | date |
+|  game  | home_team | varchar(50) |
+|  game  | away_team | varchar(50) |
+|  game  | home_score | int |
+|  game  | away_score | int |
+
+| Relation | Attribute | Domain |
+| -------- | --------- | ------ |
+| offense_game_stats | player_id | varchar(8) |
+| offense_game_stats | game_id | varchar(12) |
+| offense_game_stats | passing_completions | int |
+| offense_game_stats | passing_attempts | int |
+| offense_game_stats | passing_yards | int |
+| offense_game_stats | rushing_attempts | int |
+| offense_game_stats | rushing_yards | int |
+| offense_game_stats | fumbles | int |
+
+| Relation | Attribute | Domain |
+| -------- | --------- | ------ |
+| defense_game_stats | player_id | varchar(8) |
+| defense_game_stats | game_id | varchar(12) |
+| defense_game_stats | tackles | int |
+| defense_game_stats | sacks | int |
+| defense_game_stats | fumbles_recovered | int |
+| defense_game_stats | interceptions | int |
+| defense_game_stats | passes_defended | int |
+
+| Relation | Attribute | Domain |
+| -------- | --------- | ------ |
+| special_game_stats | player_id | varchar(8) |
+| special_game_stats | game_id | varchar(12) |
+| special_game_stats | field_goals | int |
+| special_game_stats | fg_attempts | int |
+| special_game_stats | extra_points | int |
+| special_game_stats | ep_attempts | int |
+| special_game_stats | punts | int |
+| special_game_stats | punt_yards | int |
+
+
+
+# Tools Used
+
 <img width = "450" img height = "175" alt="postgresimg" src = "https://tse2.mm.bing.net/th?id=OIP.5eAy58BXR6eyTD5BDjFbAwHaDZ&pid=Api&P=0&h=180">
 <img width = "450" img height = "175" alt="jupyternotebookimg" src = "https://tse3.mm.bing.net/th?id=OIP.BWugDHBz7qW9EOPZfSk7fgHaFx&pid=Api&P=0&h=180">
 <img width = "450" img height = "175" alt="Pythonimg" src = "https://tse4.mm.bing.net/th?id=OIP.9S6VtzL6bysprm6gao1uugHaEK&pid=Api&P=0&h=180">
