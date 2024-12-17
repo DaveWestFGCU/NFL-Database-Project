@@ -167,7 +167,7 @@ More detail regarding the attributes of each table is provided below:
 
 ## Data Popoulation
 
-Included is the SQL file for populating data for the NFL Management System database project (Team-3-Data.sql). Our group wrote a webscraper in Python using BeautifulSoup4 to obtain the data from the website \[redacted\]. The webscraper’s code located in the webscraper directory within this project. The webscraper goes to each team page to scrape the player roster, then goes to each player’s page to scrape the games they played and their statistics for that game. Then it goes to the season’s schedule to scrape the data for each game played in the season. Data not scraped, such as the stadium, season, and team data, was manually input from sources such as Wikipedia. After the program gets the data, it formats it into SQL’s data manipulation language and creates a SQL input file. 
+Included is the SQL file for populating data for the NFL Management System database project (Team-3-Data.sql). Our group wrote a webscraper in Python using BeautifulSoup4 to obtain the data from the website \[removed\]. The webscraper’s code located in the webscraper directory within this project. The webscraper goes to each team page to scrape the player roster, then goes to each player’s page to scrape the games they played and their statistics for that game. Then it goes to the season’s schedule to scrape the data for each game played in the season. Data not scraped, such as the stadium, season, and team data, was manually input from sources such as Wikipedia. After the program gets the data, it formats it into SQL’s data manipulation language and creates a SQL input file. 
 
 ## Query Questions 
 
