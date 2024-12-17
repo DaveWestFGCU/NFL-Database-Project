@@ -1,4 +1,4 @@
-# <p align="center">NFL Management System</p>
+# <p align="center">🏈 NFL Management System 🏈</p>
 
 ## Introduction
 
