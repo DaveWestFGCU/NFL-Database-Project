@@ -50,6 +50,20 @@ Thus, we derived the following schemas after applying normalization techniques:
 ## Schema Diagram:
 <p align="center"><img src="/readme/images/Schema Diagram.png"/></p>
 
+## Dataset Description :
+
+The dataset includes a handful of related tables that highlights the key components of data every football league should include: 
+- Team: Each team is identified by its mascot and is associated with details such as location, coach, home city and state, division, wins, losses, and standing, and relationships between the team and its home stadium.
+- Player: Each player is identified by an id formed by the first 4 letters of their first name, 2 letters of their last name, and a 2-digit number to maintain uniqueness between players that have similar names. The player is associated with details such as their name, team, height, position, birth_date, and college, as well as their weight, age, and years_played. Players are associated with their team through a reference to the team’s mascot.
+- Game: Each game is identified by a game_id that is composed of the date of the game and a 3-char abbreviation for the home team. A game is then associated with details such as the season year and type, season week of the game, date of the game, home team, away team, home score, and away score. A game is associated with a season by the season year and type, and the home and away teams by their mascot values.
+- Season: Each season is identified by the year in which it started. In addition, the season holds data for its start date and end date.
+- Offense_game_stats, Defense_game_stats, and Special_game_stats: These tables hold the statistics for each player for each game. Thus each tuple uses a player ID and game ID combination as the primary key. The ‘stats’ tables were split as offense, defense, and special teams track different statistics, and not needing to record null values for statistics untracked by the player’s role reduces the size of the data.
+   - Offense_game_stats: As mentioned, the table’s primary key is a player ID and a game ID. Each tuple also holds values for several statistics for an offense role player in a game, including pass completions, passing attempts, passing yards, rushing attempts, rushing yards, and fumbles. The player ID references the ID in the player table, and the game ID references the game_id in the game table.
+   - Defense_game_stats: As mentioned, the table’s primary key is a player ID and a game ID. Each tuple also holds values for several statistics for an offense role player in a game, including tackles, sacks, fumbles recovered, interceptions, and passes defended. The player ID references the ID in the player table, and the game ID references the game_id in the game table.
+   - Special_game_stats: This table refers to special teams. As mentioned, the table’s primary key is a player ID and a game ID. Each tuple also holds values for several statistics for an offense role player in a game, including field goals, field goal attempts, extra points, extra point attempts, punts, and punt yards. The player ID references the ID in the player table, and the game ID references the game_id in the game table.
+- Stadium: Stadiums are identified by their city and state and are associated with details such as their name, seating capacity, and turf type. Each stadium is connected to the team that calls it home.
+
+The dataset will be designed to support queries to view the league’s history, such as team statistics, individual player statistics, or statistics by game, as well as organize for the future such as finding information for upcoming matches. 
 
 # Tools used
 <img width = "450" img height = "175" alt="postgresimg" src = "https://tse2.mm.bing.net/th?id=OIP.5eAy58BXR6eyTD5BDjFbAwHaDZ&pid=Api&P=0&h=180">
