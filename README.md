@@ -165,7 +165,41 @@ More detail regarding the attributes of each table is provided below:
 | special_game_stats | punts | int |
 | special_game_stats | punt_yards | int |
 
+## Data Popoulation
 
+Included is the SQL file for populating data for the NFL Management System database project (Team-3-Data.sql). Our group wrote a webscraper in Python using BeautifulSoup4 to obtain the data from the website \[redacted\]. The webscraper’s code located in the webscraper directory within this project. The webscraper goes to each team page to scrape the player roster, then goes to each player’s page to scrape the games they played and their statistics for that game. Then it goes to the season’s schedule to scrape the data for each game played in the season. Data not scraped, such as the stadium, season, and team data, was manually input from sources such as Wikipedia. After the program gets the data, it formats it into SQL’s data manipulation language and creates a SQL input file. 
+
+## Query Questions 
+
+As a part of our assignment, we created 10 questions that could be answered with our database and the queries to do so (Team-3-Queries.sql). The questions are as follows:
+
+1. A Colt’s fan wants to learn more about the subtotals and grand totals of the offensive player’s yards run on the Colt’s team. Using rollup, list how many yards (rush yards and pass yards) each offensive player has gained on a team in a given year, and then how many rush yards and pass yards they have gained by each position in the 2023 season.
+
+2. A sport’s analyst wants to create a report about quarterbacks rank based on the number of yards thrown. List the rankings of the quarterback's names in ascending order (Having the rank 1 quarterback at the top) along with the total number of yards thrown for each quarterback.
+
+3. NFL defensive coaches want to analyze the key defensive player positions (linebacker, safety/defensive backs) on their opponents’ teams. Create a query that shows the total number of tackles performed by these positions by pivoting about the position names. Include the name of the team as well.
+
+4. NFL fans want to know about old players (above the age of 30) in the NFL league who play on key special teams positions (kicker, punter, kick returner, punt returner). Find players that play in the current season as a kicker (K), punter (P), kick returner (KR) or punt returner (PR) and who are over the age of 30. Include the age of these player’s as well.
+
+5. A Colts fan wants to know what teams the Colts have won against in the 2023 season. Write a query that lists every team the Colts have won against and the date their game occurred.
+
+6. A sports analyst regularly needs to access the data from previous year’s SuperBowls for comparison. Create a function that accepts a season year as input and outputs the data for that season’s superbowl including: Superbowl number, participating teams, and each team’s score.
+
+7. An offensive NFL coach wants to know more about the quarterback Patrick Mahomes' progress in cumulative passing yards. Create a window showing the progress of Patrick Mahomes by cumulative passing yards thrown each game date he plays in the current regular season.
+
+8. A new fan wants to choose a favorite team. He wants a team that frequently makes it to the AFC or NFC conference championship game, meaning they frequently have good seasons. Write a query that will display the home and away teams for the conference championship games, organized by year and which conference they belonged to.
+
+9. The fan from the above question now wants to move to the location of the stadium that has hosted the most conference championship games. Rank the stadiums by the number of conference championship games they have hosted. Include their city and state.
+
+10. A common point of pride for an NFL team is how many Super Bowl championship games they have won throughout their history. Create a query that ranks teams by Super Bowl wins, excluding teams that have not won a SuperBowl.  
+
+## Accessing via Python
+
+Using Jupyter Notebook, SQLAlchemy, and Pandas, we replicated the 10 query questions our team had above (found in Team-3.ipynb). Queries 1-5 were performed using [SQLAlchemy](https://docs.sqlalchemy.org/en/20/contents.html) to query the database for exactly the data our queries seek to answer. Queries 6-10, however, required using tools such as views and functions, which are poorly documented. Further, searching websites such as Stack Overflow primarily yielded syntax from SQLAlchemy 1.4, while the current version (2.0) has had significant changes. As such, we loaded Pandas DataFrames with the values from our tables and used Pandas functions to find the answers to our queries. In all cases, the results are displayed in a DataFrame. 
+
+## Conclusion
+
+Overall, our team enjoyed the process of applying the data engineering concepts learned to a project that we were interested to learn more about, an NFL management system. We had to learn not only about databases, but about the NFL, as each of us had assumed our other two teammates had in-depth knowledge about the NFL when we selected the topic. Our team learned how to apply intermediate and advanced concepts in SQL such as joins, functions, views, and windowing for extracting questions our team really wanted to answer regarding our NFL data. Furthermore, our team has learned that it is important to carefully design the schema for the NFL management system before actually trying to query any data. 
 
 # Tools Used
 
